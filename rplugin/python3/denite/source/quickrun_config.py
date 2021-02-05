@@ -12,11 +12,11 @@ class Source(Base):
 	def gather_candidates(self, context):
 		candidates = ['apple', 'banana', 'cake']
 		filetype = self.vim.eval("&filetype")
-		quickrun_config = self.vim.call('denite#quickrun_config#quickrun_config_all')
-		candidates2 = [key for key in quickrun_config.keys() if re.match(r'^ruby/', key)]
+		quickrun_config = self.vim.call('denite#quickrun_config#gather_candidates')
+		candidates = quickrun_config.keys()
 		
 		return list(map(lambda candidate: {
 			'word': candidate,
 			'action__filetype': filetype
-			}, candidates2))
+			}, candidates))
 
